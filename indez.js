@@ -103,8 +103,7 @@ rizzy.addEventListener("keydown", (event) => {
       }, 1000);
 
       rizzy.value = "";
-    } else if (rizle.length >= 1200) {
-      console.log("NOPE");
+    } else if (rizle.length >= 60) {
       hm23.style.opacity = 1;
       setTimeout(() => {
         hm23.style.opacity = 0;
