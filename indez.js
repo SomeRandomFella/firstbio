@@ -1,3 +1,40 @@
+const entryOverlay = document.querySelector(".entry-overlay");
+const clickMeBtn = document.querySelector(".click-me-btn");
+const audio = new Audio("hm.mp3");
+
+entryOverlay.addEventListener("click", () => {
+  document.body.classList.remove("blurred");
+  audio.volume = 0.1;
+  audio.play();
+});
+
+function createSnowflakes() {
+  const snowflakesContainer = document.querySelector(".snowflakes");
+  const snowflakeSymbols = ["❄", "❅", "❆", "✻", "✼", "❇", "✦"];
+
+  for (let i = 0; i < 50; i++) {
+    const snowflake = document.createElement("div");
+    snowflake.className = "snowflake";
+    snowflake.innerHTML =
+      snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+    snowflake.style.left = Math.random() * 100 + "%";
+    snowflake.style.fontSize = Math.random() * 10 + 10 + "px";
+    const duration = Math.random() * 5 + 4;
+    snowflake.style.animationDuration = duration + "s";
+    snowflake.style.animationDelay = Math.random() * 2 + "s";
+
+    snowflake.addEventListener("animationend", () => {
+      snowflake.classList.add("landed");
+      snowflake.style.bottom = "0px";
+      snowflake.style.top = "auto";
+    });
+
+    snowflakesContainer.appendChild(snowflake);
+  }
+}
+
+createSnowflakes();
+
 const themeBtn = document.getElementById("theme-btn");
 const body = document.body;
 
@@ -27,36 +64,6 @@ const urls = [
   "https://images.pexels.com/photos/127028/pexels-photo-127028.jpeg",
   "https://images.pexels.com/photos/96938/pexels-photo-96938.jpeg",
 ];
-const audio = new Audio("hm.mp3");
-audio.play();
-audio.volume = 0.2;
-
-function createSnowflakes() {
-  const snowflakesContainer = document.querySelector(".snowflakes");
-  const snowflakeSymbols = ["❄", "❅", "❆", "✻", "✼", "❇", "✦"];
-
-  for (let i = 0; i < 50; i++) {
-    const snowflake = document.createElement("div");
-    snowflake.className = "snowflake";
-    snowflake.innerHTML =
-      snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
-    snowflake.style.left = Math.random() * 100 + "%";
-    snowflake.style.fontSize = Math.random() * 10 + 10 + "px";
-    const duration = Math.random() * 5 + 4;
-    snowflake.style.animationDuration = duration + "s";
-    snowflake.style.animationDelay = Math.random() * 2 + "s";
-
-    snowflake.addEventListener("animationend", () => {
-      snowflake.classList.add("landed");
-      snowflake.style.bottom = "0px";
-      snowflake.style.top = "auto";
-    });
-
-    snowflakesContainer.appendChild(snowflake);
-  }
-}
-
-createSnowflakes();
 
 setTimeout(() => {
   if (count === 0) {
@@ -97,8 +104,8 @@ rizzy.addEventListener("keydown", (event) => {
               <li>/cat - sends a random cat gif</li>
               <li>/clear - clear the chat</li>
               <li>/time - shows what time it is for me</li>
-              <li>/mute - to mute the music</li>
-              <li>/unmute - unmute the music</li>
+              <li>/mute - mute the audio</li>
+              <li>/unmute - unmute the audio</li>
             </ul>
                 `;
           break;
@@ -128,11 +135,11 @@ rizzy.addEventListener("keydown", (event) => {
           break;
         case "/mute":
           audio.pause();
-          use = "ok paused it sir";
+          use = "okay muted big boss";
           break;
         case "/unmute":
           audio.play();
-          use = "alr we back";
+          use = "we back";
           break;
       }
 
