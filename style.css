@@ -173,6 +173,63 @@ body.dark-mode .bot-label {
   color: #bbb;
 }
 
+body.blurred > *:not(.entry-overlay) {
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.entry-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.5s ease;
+}
+
+.click-me-btn {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff;
+  cursor: pointer;
+  user-select: none;
+  animation: glow 2s ease-in-out infinite alternate;
+  transition: all 0.3s ease;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff;
+  }
+  to {
+    text-shadow: 0 0 8px #ffffff, 0 0 15px #ffffff, 0 0 20px #ffffff;
+  }
+}
+
+.click-me-btn:hover {
+  transform: scale(1.1);
+  animation-duration: 0.5s;
+}
+
+body:not(.blurred) .entry-overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body:not(.blurred) > *:not(.entry-overlay) {
+  filter: none;
+  pointer-events: auto;
+  transition: filter 0.5s ease;
+}
+
 .snowflakes {
   position: fixed;
   top: 0;
